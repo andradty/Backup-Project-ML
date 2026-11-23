@@ -1,96 +1,42 @@
-# 🌾 PadiGuard AI — Klasifikasi Penyakit Daun Padi (Rice Leaf Disease Classification)
+# 🌾 PadiGuard AI — Sistem Cerdas Deteksi & Klasifikasi Penyakit Daun Padi
 
-Aplikasi berbasis web interaktif (**Streamlit**) dan *Machine Learning* untuk mendeteksi serta mengklasifikasikan **4 penyakit utama daun tanaman padi** (*Oryza sativa*) berdasarkan ekstraksi **100 fitur visual citra** (Histogram Warna HSV/RGB, Color Moments, Tekstur GLCM, Rasio Lesi, dan Gradien Tepi Sobel).
+**PadiGuard AI** adalah aplikasi web interaktif berbasis **Streamlit** dan *Computer Vision / Machine Learning* yang dirancang untuk membantu identifikasi dini serta diagnosis visual **4 penyakit utama pada daun tanaman padi** (*Oryza sativa*).
 
----
-
-## 📌 Ringkasan Proyek & Hasil Eksperimen
-
-- **Dataset:** *Rice Leaf Disease Image Samples* (`penyakit padi/` — Sethy et al., 2020 / Mendeley Data)
-- **4 Kelas Penyakit:**
-  1. `Bacterialblight` — Hawar Daun Bakteri (*Xanthomonas oryzae*)
-  2. `Blast` — Penyakit Blas (*Pyricularia oryzae*)
-  3. `Brownspot` — Bercak Cokelat (*Bipolaris oryzae*)
-  4. `Tungro` — Virus Tungro (*RTBV & RTSV*)
-- **Audit Kualitas Data & Pencegahan Data Leakage:**
-  - Total citra mentah: **5.932 citra** (0 file rusak, 5.776 RGB, 156 RGBA).
-  - Ditemukan dan dihapus **1.138 duplikat identik (MD5 Hash — 19,18%)** → tersisa **4.794 citra unik**.
-  - Ditemukan bahwa 4.794 citra tersebut berasal dari **858 spesimen daun fisik** yang mengalami rotasi/flip. Untuk mencegah *augmentation data leakage*, pembagian Train/Test (80:20) dilakukan dengan **StratifiedGroupKFold** berdasarkan `leaf_group` (**3.832 citra latih [686 daun]** dan **962 citra uji [172 daun]**).
-
-### 🏆 Tabel Perbandingan 3 Algoritma pada Hold-Out Test Set (962 Citra / 172 Daun Unik)
-
-| Algoritma Model | 5-Fold Group-CV F1 (Train) | Test Accuracy | Test Precision (Macro) | Test Recall (Macro) | Test F1-Macro | Test ROC-AUC (OvR) | Ukuran File |
-|---|---|---|---|---|---|---|---|
-| **SVM (RBF, C=10, balanced) [Model Final]** | **0,9761** | **98,75% (0,9875)** | **0,9853** | **0,9889** | **0,9867** | **1,0000** | **0,28 MB** |
-| **XGBoost** (n=350, depth=5, lr=0,06) | 0,9716 | **98,75% (0,9875)** | 0,9894 | 0,9844 | 0,9865 | 0,9996 | 0,38 MB |
-| **Random Forest** (n=300, depth=16) | 0,9540 | 97,51% (0,9751) | 0,9733 | 0,9733 | 0,9733 | 0,9996 | 1,43 MB |
+Aplikasi ini menganalisis citra daun padi secara otomatis melalui ekstraksi **100 fitur visual citra** — meliputi *Histogram Warna HSV & RGB*, *Color Moments*, *Tekstur GLCM (Gray-Level Co-occurrence Matrix)*, *Rasio Area Lesi & Klorosis*, serta *Gradien Tepi Sobel* — untuk memberikan hasil diagnosis penyakit beserta informasi agronomis dan rekomendasi penanganan awal secara *real-time*.
 
 ---
 
-## 🗂️ Struktur Direktori
+## ✨ Fitur Utama Aplikasi Web PadiGuard AI
 
-```text
-Projek_3rd/
-├── app.py                              # Halaman utama Streamlit (Deteksi & Diagnosis Citra Daun)
-├── pages/
-│   ├── 1_Model_Evaluation.py           # Dashboard evaluasi model, confusion matrix & feature importance
-│   └── 2_About_Project.py              # Penjelasan penyakit, metodologi, 5 jurnal literatur & disclaimer
-├── penyakit padi/                      # Dataset citra asli (5.932 citra dalam 4 subfolder kelas)
-├── data/
-│   └── processed/                      # Hasil audit MD5 & ekstraksi 100 fitur (metadata_audit.csv, features_unique.csv, train/test)
-├── models/                             # Pipeline tersimpan (final_model.joblib, svm_pipeline.joblib, xgboost_pipeline.joblib, rf_pipeline.joblib)
-├── notebooks/
-│   ├── 01_data_understanding.ipynb     # M2: Audit dataset, resolusi, mode RGBA & duplikat MD5
-│   ├── 02_eda.ipynb                    # M3: Visualisasi sampel citra, distribusi warna HSV & tekstur GLCM
-│   ├── 03_preprocessing.ipynb          # M4: Ekstraksi 100 fitur, uji ablasi leakage & StratifiedGroupKFold
-│   ├── 04_model_training.ipynb         # M5: Pelatihan baseline 3 algoritma dengan 5-Fold Group-CV
-│   └── 05_model_evaluation.ipynb       # M6: Hyperparameter tuning, evaluasi test set & pemilihan model final
-├── src/
-│   ├── __init__.py                     # Konstanta path & informasi agronomis 4 penyakit daun padi
-│   ├── data_loader.py                  # Pemindaian folder citra, MD5 hash & ekstraksi ID spesimen daun
-│   ├── preprocessing.py                # Validasi citra & ekstraksi 100 fitur (HSV, RGB, Moments, GLCM, Lesion, Sobel)
-│   ├── train.py                        # Pipeline training, ablasi duplikat, Group-CV & penyimpanan model
-│   ├── evaluate.py                     # Pembuatan 7 visualisasi PNG di reports/figures/
-│   └── predict.py                      # Modul inferensi untuk aplikasi Streamlit
-├── reports/
-│   ├── evaluation_summary.json         # Ringkasan lengkap seluruh metrik eksperimen
-│   ├── model_comparison.csv            # Tabel perbandingan metrik 3 algoritma
-│   ├── feature_importance.csv          # Peringkat 100 fitur citra
-│   ├── test_predictions.csv            # Hasil prediksi pada 962 citra data uji
-│   └── figures/                        # 7 visualisasi PNG (distribusi kelas, sampel, boxplot, korelasi, perbandingan, CM, feature importance)
-├── PRD.md                              # Product Requirements Document (Versi 1.1 lengkap dengan 5 jurnal studi literatur)
-├── requirements.txt
-└── README.md
-```
+1. **🔍 Pemindai & Deteksi Daun Padi Interaktif (*Real-Time Scanner*)**
+   - Mendukung unggah foto daun padi (`JPG`, `JPEG`, `PNG`) maupun pengujian instan menggunakan **sampel citra uji** dari 4 kelas penyakit.
+   - Menampilkan hasil diagnosis penyakit utama beserta **tingkat keyakinan (*Confidence Score*)** dan grafik distribusi probabilitas untuk seluruh kelas penyakit.
+   - Dilengkapi pilihan **3 model *Machine Learning*** (*SVM RBF*, *XGBoost*, dan *Random Forest*) yang dapat diganti langsung dari antarmuka web.
+
+2. **🌿 Informasi Agronomis & Rekomendasi Penanganan**
+   - Setiap hasil deteksi dilengkapi rincian **Patogen Penyebab**, **Karakteristik Gejala Visual**, **Dampak Pertanian**, serta **Saran Penanganan Awal** untuk membantu pengambilan keputusan skrining di lapangan.
+
+3. **📊 Dashboard Evaluasi & Transparansi Model**
+   - Menyajikan visualisasi interaktif performa algoritma, perbandingan metrik antar-model, *Confusion Matrix*, analisis fitur visual terpenting (*Feature Importance*), serta studi literatur dan metodologi sistem.
 
 ---
 
-## 🚀 Cara Menjalankan Aplikasi & Eksperimen
+## 🦠 4 Penyakit Daun Padi yang Dideteksi
 
-### 1. Persiapan Environment
-Pastikan Anda menggunakan Python (misalnya dari Anaconda) dan telah memasang dependensi pada `requirements.txt`:
+| Kelas Penyakit | Nama Indonesia | Patogen Penyebab | Karakteristik Gejala Visual Utama |
+|---|---|---|---|
+| **`Bacterialblight`** | Hawar Daun Bakteri (Kresek) | Bakteri *Xanthomonas oryzae* pv. *oryzae* | Garis lesi basah kekuningan hingga putih keabu-abuan memanjang di sepanjang tepi/ujung helai daun. |
+| **`Blast`** | Penyakit Blas | Jamur *Pyricularia oryzae* (*Magnaporthe oryzae*) | Bercak berbentuk belah ketupat (*diamond/spindle-shaped*) dengan bagian tengah abu-abu keputihan dan tepi cokelat tua. |
+| **`Brownspot`** | Bercak Cokelat | Jamur *Bipolaris oryzae* (*Cochliobolus miyabeanus*) | Bercak oval atau bulat kecil berwarna cokelat tua hingga kemerahan dengan lingkaran halo kuning di sekelilingnya. |
+| **`Tungro`** | Penyakit Virus Tungro | *Rice Tungro Bacilliform Virus (RTBV)* & *Spherical Virus (RTSV)* | Perubahan warna daun (*klorosis*) menjadi kuning-oranye cerah mulai dari ujung daun disertai bercak karat kecil. |
 
-```powershell
-pip install -r requirements.txt
-```
+---
 
-### 2. Menjalankan Aplikasi Web Streamlit
-Dari direktori proyek (`D:\Anaconda\Projek_3rd`), jalankan perintah berikut:
+## 🛠️ Teknologi yang Digunakan
 
-```powershell
-# Jika menggunakan Anaconda di D:\Anaconda:
-D:\Anaconda\Scripts\streamlit.exe run app.py
+- **Antarmuka Web (Frontend & UI):** Streamlit, Custom CSS & SVG Animations
+- **Pemrosesan Citra (Computer Vision):** Pillow (PIL), NumPy, Scikit-Image (GLCM & Sobel Filter)
+- **Machine Learning:** Scikit-Learn (SVM RBF, Random Forest), XGBoost, Joblib
+- **Visualisasi Data:** Matplotlib, Seaborn, Pandas
 
-# Atau jika python sudah ada di PATH:
-python -m streamlit run app.py
-```
-
-Aplikasi akan terbuka otomatis di browser pada alamat `http://localhost:8501`.
-
-### 3. Menjalankan Ulang Pipeline Training & Visualisasi (Opsional)
-Seluruh model (`.joblib`), fitur (`.csv`), dan grafik (`.png`) sudah tersedia dan siap pakai. Jika ingin melatih ulang dari awal:
-
-```powershell
-D:\Anaconda\python.exe -m src.train
-D:\Anaconda\python.exe -m src.evaluate
-```
+---
