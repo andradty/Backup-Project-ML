@@ -1,0 +1,20 @@
+[tool.pyrefly]
+python-interpreter-path = "D:\\Anaconda\\python.exe"
+search-path = [
+    "D:\\Anaconda\\Projek_3rd",
+    "D:\\Anaconda\\Lib\\site-packages"
+]
+
+[tool.basedpyright]
+pythonPath = "D:\\Anaconda\\python.exe"
+extraPaths = [
+    "D:\\Anaconda\\Projek_3rd",
+    "D:\\Anaconda\\Lib\\site-packages"
+]
+
+[tool.pyright]
+pythonPath = "D:\\Anaconda\\python.exe"
+extraPaths = [
+    "D:\\Anaconda\\Projek_3rd",
+    "D:\\Anaconda\\Lib\\site-packages"
+]

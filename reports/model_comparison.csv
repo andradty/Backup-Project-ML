@@ -1,0 +1,4 @@
+model,accuracy,precision_macro,recall_macro,f1_macro,f1_weighted,roc_auc_ovr,train_accuracy,train_f1_macro,train_roc_auc,cv_f1_macro,cv_accuracy,cv_roc_auc,train_time_sec,model_size_mb
+SVM (RBF),0.9875,0.9853,0.9889,0.9867,0.9876,1.0,1.0,1.0,1.0,0.9761,0.9781,0.998,4.27,0.28
+Random Forest,0.9751,0.9733,0.9733,0.9733,0.9751,0.9996,1.0,1.0,1.0,0.954,0.958,0.9979,11.36,1.43
+XGBoost,0.9875,0.9894,0.9844,0.9865,0.9875,0.9996,1.0,1.0,1.0,0.9716,0.9736,0.9979,23.53,0.38

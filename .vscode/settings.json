@@ -1,0 +1,7 @@
+{
+  "python.defaultInterpreterPath": "D:\\Anaconda\\python.exe",
+  "python.analysis.extraPaths": [
+    "D:\\Anaconda\\Lib\\site-packages",
+    "D:\\Anaconda\\Projek_3rd"
+  ]
+}

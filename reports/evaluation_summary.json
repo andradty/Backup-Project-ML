@@ -1,0 +1,517 @@
+{
+  "dataset_summary": {
+    "total_files": 5932,
+    "corrupt_count": 0,
+    "duplicate_count": 1138,
+    "duplicate_pct": 19.18,
+    "unique_count": 4794,
+    "unique_leaf_specimens": 858,
+    "per_class_raw": {
+      "Bacterialblight": 1584,
+      "Blast": 1440,
+      "Brownspot": 1600,
+      "Tungro": 1308
+    },
+    "per_class_unique": {
+      "Bacterialblight": 1326,
+      "Blast": 960,
+      "Brownspot": 1200,
+      "Tungro": 1308
+    },
+    "per_class_dup": {
+      "Bacterialblight": 258,
+      "Blast": 480,
+      "Brownspot": 400
+    },
+    "per_class_leaf_specimens": {
+      "Bacterialblight": 221,
+      "Blast": 160,
+      "Brownspot": 200,
+      "Tungro": 277
+    },
+    "modes": {
+      "RGB": 5776,
+      "RGBA": 156
+    },
+    "top_resolutions": {
+      "300x300": 4624,
+      "295x221": 12,
+      "499x332": 12,
+      "221x295": 12,
+      "288x216": 11,
+      "521x348": 11,
+      "284x426": 10,
+      "331x497": 10,
+      "381x571": 10,
+      "216x288": 9
+    }
+  },
+  "split_info": {
+    "total_unique": 4794,
+    "unique_leaf_specimens": 858,
+    "train_size": 3832,
+    "train_leaf_specimens": 686,
+    "test_size": 962,
+    "test_leaf_specimens": 172,
+    "num_features": 100,
+    "train_class_counts": {
+      "Bacterialblight": 1056,
+      "Tungro": 1048,
+      "Brownspot": 960,
+      "Blast": 768
+    },
+    "test_class_counts": {
+      "Bacterialblight": 270,
+      "Tungro": 260,
+      "Brownspot": 240,
+      "Blast": 192
+    }
+  },
+  "duplicate_ablation": {
+    "with_duplicates_total": 5932,
+    "with_duplicates_test_acc": 1.0,
+    "with_duplicates_test_f1": 1.0,
+    "naive_dedup_total": 4794,
+    "naive_dedup_test_acc": 1.0,
+    "naive_dedup_test_f1": 1.0,
+    "group_aware_total": 4794,
+    "group_aware_test_acc": 0.9751,
+    "group_aware_test_f1": 0.9733
+  },
+  "baseline_cv_results": {
+    "Dummy (Stratified)": {
+      "accuracy": 0.2523,
+      "precision_macro": 0.2446,
+      "recall_macro": 0.2453,
+      "f1_macro": 0.2447,
+      "f1_weighted": 0.2513,
+      "roc_auc_ovr": 0.4974,
+      "time_sec": 0.55
+    },
+    "SVM (RBF Baseline)": {
+      "accuracy": 0.9789,
+      "precision_macro": 0.9775,
+      "recall_macro": 0.9764,
+      "f1_macro": 0.9769,
+      "f1_weighted": 0.9788,
+      "roc_auc_ovr": 0.9974,
+      "time_sec": 4.59
+    },
+    "Random Forest (Baseline)": {
+      "accuracy": 0.9609,
+      "precision_macro": 0.9602,
+      "recall_macro": 0.9562,
+      "f1_macro": 0.9576,
+      "f1_weighted": 0.9605,
+      "roc_auc_ovr": 0.9976,
+      "time_sec": 3.01
+    },
+    "XGBoost (Baseline)": {
+      "accuracy": 0.977,
+      "precision_macro": 0.9761,
+      "recall_macro": 0.9739,
+      "f1_macro": 0.9749,
+      "f1_weighted": 0.9769,
+      "roc_auc_ovr": 0.9974,
+      "time_sec": 8.55
+    }
+  },
+  "tuned_cv_results": {
+    "SVM (RBF)": {
+      "accuracy": 0.9781,
+      "precision_macro": 0.9767,
+      "recall_macro": 0.9757,
+      "f1_macro": 0.9761,
+      "f1_weighted": 0.978,
+      "roc_auc_ovr": 0.998
+    },
+    "Random Forest": {
+      "accuracy": 0.958,
+      "precision_macro": 0.9578,
+      "recall_macro": 0.9521,
+      "f1_macro": 0.954,
+      "f1_weighted": 0.9574,
+      "roc_auc_ovr": 0.9979
+    },
+    "XGBoost": {
+      "accuracy": 0.9736,
+      "precision_macro": 0.9728,
+      "recall_macro": 0.9709,
+      "f1_macro": 0.9716,
+      "f1_weighted": 0.9735,
+      "roc_auc_ovr": 0.9979
+    }
+  },
+  "test_results": {
+    "SVM (RBF)": {
+      "accuracy": 0.9875,
+      "precision_macro": 0.9853,
+      "recall_macro": 0.9889,
+      "f1_macro": 0.9867,
+      "f1_weighted": 0.9876,
+      "roc_auc_ovr": 1.0,
+      "train_accuracy": 1.0,
+      "train_f1_macro": 1.0,
+      "train_roc_auc": 1.0,
+      "cv_f1_macro": 0.9761,
+      "cv_accuracy": 0.9781,
+      "cv_roc_auc": 0.998,
+      "train_time_sec": 4.27,
+      "model_size_mb": 0.28
+    },
+    "Random Forest": {
+      "accuracy": 0.9751,
+      "precision_macro": 0.9733,
+      "recall_macro": 0.9733,
+      "f1_macro": 0.9733,
+      "f1_weighted": 0.9751,
+      "roc_auc_ovr": 0.9996,
+      "train_accuracy": 1.0,
+      "train_f1_macro": 1.0,
+      "train_roc_auc": 1.0,
+      "cv_f1_macro": 0.954,
+      "cv_accuracy": 0.958,
+      "cv_roc_auc": 0.9979,
+      "train_time_sec": 11.36,
+      "model_size_mb": 1.43
+    },
+    "XGBoost": {
+      "accuracy": 0.9875,
+      "precision_macro": 0.9894,
+      "recall_macro": 0.9844,
+      "f1_macro": 0.9865,
+      "f1_weighted": 0.9875,
+      "roc_auc_ovr": 0.9996,
+      "train_accuracy": 1.0,
+      "train_f1_macro": 1.0,
+      "train_roc_auc": 1.0,
+      "cv_f1_macro": 0.9716,
+      "cv_accuracy": 0.9736,
+      "cv_roc_auc": 0.9979,
+      "train_time_sec": 23.53,
+      "model_size_mb": 0.38
+    }
+  },
+  "best_model": "SVM (RBF)",
+  "confusion_matrices": {
+    "SVM (RBF)": [
+      [
+        258,
+        12,
+        0,
+        0
+      ],
+      [
+        0,
+        192,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        240,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        260
+      ]
+    ],
+    "Random Forest": [
+      [
+        258,
+        12,
+        0,
+        0
+      ],
+      [
+        12,
+        180,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        240,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        260
+      ]
+    ],
+    "XGBoost": [
+      [
+        270,
+        0,
+        0,
+        0
+      ],
+      [
+        12,
+        180,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        240,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        260
+      ]
+    ]
+  },
+  "per_class_reports": {
+    "SVM (RBF)": {
+      "Bacterialblight": {
+        "precision": 1.0,
+        "recall": 0.9555555555555556,
+        "f1-score": 0.9772727272727273,
+        "support": 270.0
+      },
+      "Blast": {
+        "precision": 0.9411764705882353,
+        "recall": 1.0,
+        "f1-score": 0.9696969696969697,
+        "support": 192.0
+      },
+      "Brownspot": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 240.0
+      },
+      "Tungro": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 260.0
+      },
+      "accuracy": 0.9875259875259875,
+      "macro avg": {
+        "precision": 0.9852941176470589,
+        "recall": 0.9888888888888889,
+        "f1-score": 0.9867424242424243,
+        "support": 962.0
+      },
+      "weighted avg": {
+        "precision": 0.9882597529656354,
+        "recall": 0.9875259875259875,
+        "f1-score": 0.9875732375732376,
+        "support": 962.0
+      }
+    },
+    "Random Forest": {
+      "Bacterialblight": {
+        "precision": 0.9555555555555556,
+        "recall": 0.9555555555555556,
+        "f1-score": 0.9555555555555556,
+        "support": 270.0
+      },
+      "Blast": {
+        "precision": 0.9375,
+        "recall": 0.9375,
+        "f1-score": 0.9375,
+        "support": 192.0
+      },
+      "Brownspot": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 240.0
+      },
+      "Tungro": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 260.0
+      },
+      "accuracy": 0.975051975051975,
+      "macro avg": {
+        "precision": 0.9732638888888889,
+        "recall": 0.9732638888888889,
+        "f1-score": 0.9732638888888889,
+        "support": 962.0
+      },
+      "weighted avg": {
+        "precision": 0.975051975051975,
+        "recall": 0.975051975051975,
+        "f1-score": 0.975051975051975,
+        "support": 962.0
+      }
+    },
+    "XGBoost": {
+      "Bacterialblight": {
+        "precision": 0.9574468085106383,
+        "recall": 1.0,
+        "f1-score": 0.9782608695652174,
+        "support": 270.0
+      },
+      "Blast": {
+        "precision": 1.0,
+        "recall": 0.9375,
+        "f1-score": 0.967741935483871,
+        "support": 192.0
+      },
+      "Brownspot": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 240.0
+      },
+      "Tungro": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 260.0
+      },
+      "accuracy": 0.9875259875259875,
+      "macro avg": {
+        "precision": 0.9893617021276596,
+        "recall": 0.984375,
+        "f1-score": 0.9865007012622721,
+        "support": 962.0
+      },
+      "weighted avg": {
+        "precision": 0.9880567965674348,
+        "recall": 0.9875259875259875,
+        "f1-score": 0.9874603808685155,
+        "support": 962.0
+      }
+    }
+  },
+  "top_20_features": [
+    {
+      "feature": "sobel_edge_p90",
+      "rf_importance": 0.044918726142180364,
+      "xgb_importance": 0.07683505862951279,
+      "mean_importance": 0.06087689238584658
+    },
+    {
+      "feature": "center_lesion_ratio",
+      "rf_importance": 0.03372376428373239,
+      "xgb_importance": 0.0710015743970871,
+      "mean_importance": 0.05236266934040974
+    },
+    {
+      "feature": "glcm_correlation_std",
+      "rf_importance": 0.03113078080550361,
+      "xgb_importance": 0.05484991520643234,
+      "mean_importance": 0.042990348005967974
+    },
+    {
+      "feature": "sobel_edge_std",
+      "rf_importance": 0.027596540546801145,
+      "xgb_importance": 0.04323263093829155,
+      "mean_importance": 0.03541458574254635
+    },
+    {
+      "feature": "glcm_correlation_mean",
+      "rf_importance": 0.02925464120621535,
+      "xgb_importance": 0.03182772174477577,
+      "mean_importance": 0.03054118147549556
+    },
+    {
+      "feature": "ratio_white_pale_lesion",
+      "rf_importance": 0.009389190087116193,
+      "xgb_importance": 0.03046954795718193,
+      "mean_importance": 0.019929369022149063
+    },
+    {
+      "feature": "ratio_brown_necrotic",
+      "rf_importance": 0.019751733973122115,
+      "xgb_importance": 0.027968615293502808,
+      "mean_importance": 0.023860174633312463
+    },
+    {
+      "feature": "moment_v_std",
+      "rf_importance": 0.03975445115665748,
+      "xgb_importance": 0.0225970596075058,
+      "mean_importance": 0.03117575538208164
+    },
+    {
+      "feature": "rgb_b_bin_02",
+      "rf_importance": 0.008654222879526788,
+      "xgb_importance": 0.02084396965801716,
+      "mean_importance": 0.014749096268771973
+    },
+    {
+      "feature": "glcm_contrast_std",
+      "rf_importance": 0.012829366876395703,
+      "xgb_importance": 0.020707078278064728,
+      "mean_importance": 0.016768222577230214
+    },
+    {
+      "feature": "hsv_s_bin_02",
+      "rf_importance": 0.013824477114423181,
+      "xgb_importance": 0.017654186114668846,
+      "mean_importance": 0.015739331614546014
+    },
+    {
+      "feature": "sobel_edge_mean",
+      "rf_importance": 0.022291132935585017,
+      "xgb_importance": 0.015365230850875378,
+      "mean_importance": 0.018828181893230198
+    },
+    {
+      "feature": "hsv_h_bin_09",
+      "rf_importance": 0.005646457985763338,
+      "xgb_importance": 0.015169300138950348,
+      "mean_importance": 0.010407879062356844
+    },
+    {
+      "feature": "glcm_contrast_mean",
+      "rf_importance": 0.018879378339096878,
+      "xgb_importance": 0.014919246546924114,
+      "mean_importance": 0.016899312443010496
+    },
+    {
+      "feature": "moment_g_skew",
+      "rf_importance": 0.0061657965196787404,
+      "xgb_importance": 0.01397224422544241,
+      "mean_importance": 0.010069020372560574
+    },
+    {
+      "feature": "hsv_s_bin_01",
+      "rf_importance": 0.030664404281547323,
+      "xgb_importance": 0.013876647688448429,
+      "mean_importance": 0.022270525984997874
+    },
+    {
+      "feature": "hsv_s_bin_04",
+      "rf_importance": 0.006168680764693793,
+      "xgb_importance": 0.013871497474610806,
+      "mean_importance": 0.0100200891196523
+    },
+    {
+      "feature": "ratio_yellow_orange_tungro",
+      "rf_importance": 0.008087788930696059,
+      "xgb_importance": 0.012629162520170212,
+      "mean_importance": 0.010358475725433136
+    },
+    {
+      "feature": "moment_s_skew",
+      "rf_importance": 0.007397996266370259,
+      "xgb_importance": 0.012438132427632809,
+      "mean_importance": 0.009918064347001534
+    },
+    {
+      "feature": "moment_h_skew",
+      "rf_importance": 0.009838451294715578,
+      "xgb_importance": 0.012409534305334091,
+      "mean_importance": 0.011123992800024834
+    }
+  ]
+}
