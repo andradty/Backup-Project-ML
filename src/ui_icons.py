@@ -42,9 +42,14 @@ button[kind="secondary"] {
     color: #e2e8f0 !important;
     border: 1px solid rgba(148, 163, 184, 0.3) !important;
     border-radius: 10px !important;
-    padding: 0.55rem 1.25rem !important;
+    padding: 0.5rem 0.65rem !important;
     font-weight: 600 !important;
+    white-space: nowrap !important;
     transition: all 0.25s ease !important;
+}
+button[kind="secondary"] p {
+    white-space: nowrap !important;
+    font-size: 0.88rem !important;
 }
 button[kind="secondary"]:hover {
     border-color: #4ade80 !important;
